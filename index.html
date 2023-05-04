@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <link href="./style.css" rel="stylesheet">
+    <title>Shere | X-Team</title>
+</head>
+
+<body>
+  <div id="container"></div>
+  <script src='https://unpkg.com/three@0.138.0/build/three.min.js'></script>
+
+  <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.138.0/build/three.module.js",
+          "tree/DRACOLoader": "/https://unpkg.com/three@0.138.0/examples/jsm/loaders/DRACOLoader.js",
+          "tree/GLTFLoader": "/https://unpkg.com/three@0.138.0/examples/jsm/loaders/GLTFLoader.js"
+        }
+      }
+  </script>
+    <script id="vertexShaderAtmosphere" type="x-shader/x-vertex">
+      varying vec3 vNormal;
+      void main() 
+      {
+          vNormal = normalize( normalMatrix * normal );
+          gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+      }
+    </script>
+      
+      <!-- fragment shader a.k.a. pixel shader -->
+    <script id="fragmentShaderAtmosphere" type="x-shader/x-vertex"> 
+      uniform float c;
+      uniform float p;
+      varying vec3 vNormal;
+      void main() 
+      {
+        float intensity = pow( c - dot( vNormal, vec3( 0.0, 0.0, 1.0 ) ), p ); 
+        gl_FragColor = vec4( 1.0, 1.0, 1.0, 1.0 ) * intensity;
+      }
+    </script>
+    <script src="./scripts/InitGraph.js" type="module"></script>
+</body>
+
+</html>

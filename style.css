@@ -1,0 +1,17 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#container{
+    height: min(100vh, 100vw);
+    aspect-ratio: 1/1;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+@media (max-aspect-ratio: 1/1) {
+    #container{
+        transform: translateY(25vh);
+    }
+}
